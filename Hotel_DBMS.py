@@ -16,6 +16,8 @@ def HotelData():
     cur.execute(
         "CREATE TABLE IF NOT EXISTS Hotel(id INTEGER PRIMARY KEY,CusId text,Firstname text,LastName text,Address text,Gender text,Mobile Text,Nationality text,ProveofId text,DateIn text,DateOut text,Email text)")
     con.commit()
+    con.close()
+
 
 def addHotelRec(CusId, Firstname, Lastname, Address, Gender, Mobile, Nationality, ProveofId, DateIn, DateOut, Email):
     con = sqlite3.connect("booking.db")
@@ -145,6 +147,8 @@ class Hotel:
             self.txtPinCode.delete(0, END)
             self.txtMobile.delete(0, END)
             self.txtEmailid.delete(0, END)
+            self.txtPaidTax.delete(0, END)
+            self.txtSubTotal.delete(0, END)
             self.txtTotalCost.delete(0, END)
             self.txtGender.delete(0, END)
             self.txtNationality.delete(0, END)
@@ -343,6 +347,10 @@ class Hotel:
         self.txtCusID = Entry(LeftFrame, font=('arial', 12, 'bold'), width=18, textvariable=CusID)
         self.txtCusID.grid(row=0, column=1, pady=3, padx=20)
 
+        self.lblFirstName = Label(LeftFrame, font=('arial', 12, 'bold'), text="FIRST NAME:", padx=1)
+        self.lblFirstName.grid(row=1, column=0, sticky=W)
+        self.txtFirstName = Entry(LeftFrame, font=('arial', 12, 'bold'), width=18, textvariable=FirstName)
+        self.txtFirstName.grid(row=1, column=1, pady=3, padx=20)
 
         self.lblLastName = Label(LeftFrame, font=('arial', 12, 'bold'), text="LAST NAME:", padx=1)
         self.lblLastName.grid(row=2, column=0, sticky=W)
@@ -456,10 +464,17 @@ class Hotel:
 
         self.lblPaidTax = Label(RightFrame3, font=('arial', 12, 'bold'), text="PAID TAX:", padx=2, pady=2)
         self.lblPaidTax.grid(row=1, column=0, sticky=W)
+        self.txtPaidTax = Entry(RightFrame3, font=('arial', 12, 'bold'), width=79, textvariable=PaidTax, justify=LEFT)
+        self.txtPaidTax.grid(row=1, column=1, pady=3, padx=20)
 
+        self.lblSubTotal = Label(RightFrame3, font=('arial', 12, 'bold'), text="SUBTOTAL:", padx=2, pady=2)
+        self.lblSubTotal.grid(row=2, column=0, sticky=W)
+        self.txtSubTotal = Entry(RightFrame3, font=('arial', 12, 'bold'), width=79, textvariable=SubTotal, justify=LEFT)
+        self.txtSubTotal.grid(row=2, column=1, pady=3, padx=20)
 
         self.lblTotalCost = Label(RightFrame3, font=('arial', 12, 'bold'), text="TOTAL COST:", padx=2, pady=2)
-            self.txtTotalCost = Entry(RightFrame3, font=('arial', 12, 'bold'), width=79, textvariable=TotalCost,
+        self.lblTotalCost.grid(row=3, column=0, sticky=W)
+        self.txtTotalCost = Entry(RightFrame3, font=('arial', 12, 'bold'), width=79, textvariable=TotalCost,
                                   justify=LEFT)
         self.txtTotalCost.grid(row=3, column=1, pady=3, padx=20)
         # ----------------------------------------------------#WIDGET#----------------------------------------------------------#
@@ -476,6 +491,15 @@ class Hotel:
 
         self.btnTotalandAddData = Button(ButtonFrame, bd=4, font=('arial', 16, 'bold'), width=13, height=2,
                                          text="Delete", command=deleteData).grid(row=0, column=3, padx=8, pady=1)
+
+        self.btnTotalandAddData = Button(ButtonFrame, bd=4, font=('arial', 16, 'bold'), width=13, height=2,
+                                         text="Search", command=searchData).grid(row=0, column=4, padx=8, pady=1)
+
+        self.btnTotalandAddData = Button(ButtonFrame, bd=4, font=('arial', 16, 'bold'), width=13, height=2,
+                                         text="Reset", command=Reset).grid(row=0, column=5, padx=8, pady=1)
+
+        self.btnTotalandAddData = Button(ButtonFrame, bd=4, font=('arial', 16, 'bold'), width=13, height=2, text="Exit",
+                                         command=iExit).grid(row=0, column=6, padx=8, pady=1)
 
 
 if __name__ == '__main__':
